@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+/* html, */
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: #0c0e28 !important;
+  color: #ffff !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullwrapper {
+  width: 100%;
+  min-height: 100vh;
+}
+.bground {
+  background: linear-gradient(to right, #625394, #307ea1);
+  -webkit-background-clip: text;
+  background-clip: unset;
+
+  /* -webkit-text-fill-color: transparent; */
+}
+
+.bground1 {
+  /* Set the width, style, and color of the border */
+  border: 3px solid #625394;
+}
+
+.newsletterInput {
+  /* Set the width, style, and color of the border */
+  border: 3px solid #625394;
+}
+
+.bground:hover,
+.bground1:hover {
+  background: linear-gradient(to left, #625394, #307ea1);
+  -webkit-background-clip: text;
+  background-clip: unset;
+  transition: 1s all ease;
+  border: none;
+}
+
+a {
+  text-decoration: none !important;
+  color: white !important;
+}
+
+ul {
+  margin-bottom: 0 !important;
+}
+
+/* Custom scrollbar width */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as needed */
+}
+
+.route-fade-enter {
+  opacity: 0;
+}
+
+.route-fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.route-fade-exit {
+  opacity: 1;
+}
+
+.route-fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in;
+}
