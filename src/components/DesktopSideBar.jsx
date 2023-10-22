@@ -1,6 +1,8 @@
 import { links } from "@/utils/links";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
+import { FaPowerOff } from "react-icons/fa";
 
 const DesktopSideBar = () => {
   return (
@@ -20,6 +22,13 @@ const DesktopSideBar = () => {
               {link.name}
             </Link>
           ))}
+          <div
+            onClick={signOut}
+            className="hover:text-[#307ea1] flex  justify-center gap-3"
+          >
+            <FaPowerOff />
+            Sign Out
+          </div>
         </ul>
       </div>
     </div>

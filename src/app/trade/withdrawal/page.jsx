@@ -21,6 +21,11 @@ const Withdrawal = () => {
   const router = useRouter();
   const session = useSession();
 
+  const { data, error, mutate, isLoading } = useSWR(
+    `/api/trades?email=${session?.data?.user.email}`,
+    fetcher
+  );
+
   if (session.status === "loading") {
     return (
       <div className="absolute h-[100vh] w-[100vw] flex items-center justify-center">
@@ -43,11 +48,6 @@ const Withdrawal = () => {
   if (session.status === "unauthenticated") {
     router?.push("/trade/login");
   }
-
-  const { data, error, mutate, isLoading } = useSWR(
-    `/api/trades?email=${session?.data?.user.email}`,
-    fetcher
-  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
