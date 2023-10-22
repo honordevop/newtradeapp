@@ -95,7 +95,16 @@ const Register = () => {
       // const data = await res.json();
       const data = await res.json();
       // console.log(data);
-      toast(data.message);
+      toast(data.message, {
+        position: "top-right",
+        autoClose: 7000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       res.status === 201 &&
         router.push("/trade/login?success=Account has been created");
     } catch (err) {

@@ -61,7 +61,7 @@ const Dashboard = () => {
     );
   }
 
-  console.log(session);
+  // console.log(session);
   const router = useRouter();
 
   if (session.status === "loading") {

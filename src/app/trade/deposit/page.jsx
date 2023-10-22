@@ -59,7 +59,16 @@ const Deposit = () => {
       });
       const data = await res.json();
       // console.log(data);
-      toast(data.message);
+      toast(data.message, {
+        position: "top-right",
+        autoClose: 7000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       e.target.reset();
 
       // res.status === 201 &&
@@ -110,7 +119,7 @@ const Deposit = () => {
         <div className="bg-[#0c1023] h-max p-3 w-full">
           <DashboardTop />
           <div className="flex flex-col gap-4">
-            <div className="flex-1 bg-[#ff5959] flex items-center justify-between py-1 px-2 md:p-3 lg:p-5 rounded-[5px] w-max gap-5">
+            <div className="flex-1 bg-[#ff5959] flex items-center justify-between py-1 px-2 md:p-3 lg:p-5 rounded-[5px] w-max gap-5 mt-4">
               <div>
                 <p className="text-[16px]">NET BALANCE</p>
                 <h1 className="font-bold text-[20px]">0.00</h1>
@@ -118,7 +127,7 @@ const Deposit = () => {
               <FaMoneyBillAlt className="text-[30px]" />
             </div>
 
-            <div>
+            <div className="mt-3">
               <p className="bg-[#191f3a] p-2 text-[18px] font-bold">
                 MAKE A DEPOSIT
               </p>
@@ -127,21 +136,21 @@ const Deposit = () => {
               </p>
             </div>
 
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center gap-3">
               <p className="bg-[#d8efcc] p-3 text-[#1f5c01] w-full">
                 <span className="font-bold">STEP 1</span>- Send your deposit to
                 the address below
               </p>
               <h1 className="">MAKE A DEPOSIT</h1>
               <p className="font-bold">Fibomining Oficial Wallet</p>
-              <p className="p-3 bg-[#21263d]">
+              <p className="p-3 bg-[#21263d] text-[12px] md:text-[14px]">
                 admcauncapzodqjcmow7e6w6e38080c039493q
               </p>
               <p>Or scan the QR Code below</p>
               <Image src={qr} alt="qr code" />
             </div>
 
-            <div>
+            <div className="flex flex-col items-center justify-center gap-3 mt-4">
               <p className="bg-[#d8efcc] p-3 text-[#1f5c01] w-full ">
                 STEP 2 - Confirm deposit
               </p>

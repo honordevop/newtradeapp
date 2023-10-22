@@ -23,15 +23,16 @@ export const links = [
   },
   {
     id: "3",
-    name: "Withdrawal",
-    url: "/trade/withdrawal",
-    icon: <FaDollarSign />,
-  },
-  {
-    id: "4",
     name: "Deposit",
     url: "/trade/deposit",
     icon: <FaCreditCard />,
+  },
+
+  {
+    id: "4",
+    name: "Withdrawal",
+    url: "/trade/withdrawal",
+    icon: <FaDollarSign />,
   },
   {
     id: "5",
@@ -39,10 +40,10 @@ export const links = [
     url: "/trade/transactions",
     icon: <FaHistory />,
   },
-  {
-    id: "6",
-    name: "Account Settings",
-    url: "/trade/settings",
-    icon: <FaEmpire />,
-  },
+  // {
+  //   id: "6",
+  //   name: "Account Settings",
+  //   url: "/trade/settings",
+  //   icon: <FaEmpire />,
+  // },
 ];

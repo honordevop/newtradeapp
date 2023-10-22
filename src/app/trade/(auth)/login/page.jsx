@@ -12,6 +12,7 @@ import { CirclesWithBar } from "react-loader-spinner";
 import { signIn, useSession } from "next-auth/react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Login = () => {
   // const [showSignUp, setShowSignUp] = useState(false);
@@ -20,6 +21,7 @@ const Login = () => {
   const [inputType, setInputType] = useState("password");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const session = useSession();
   const router = useRouter();
@@ -37,15 +39,27 @@ const Login = () => {
     e.preventDefault();
     // const email = e.target[0].value;
     // const password = e.target[1].value;
-    console.log(email);
-    console.log(password);
+    // console.log(email);
+    // console.log(password);
 
     const res = await signIn("credentials", {
       email: email,
       password: password,
       redirect: false,
     });
-    console.log(res);
+    // console.log(res);
+    setError(res.error);
+    toast(res.error, {
+      position: "top-right",
+      autoClose: 7000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+    // console.log(res.error);
     // router?.push("/trade");
   };
 
@@ -169,6 +183,7 @@ const Login = () => {
                       />
                     )}
                   </div>
+                  <p className="text-[12px] font-bold text-red-600">{error}</p>
                   <input
                     type="submit"
                     value="Login"

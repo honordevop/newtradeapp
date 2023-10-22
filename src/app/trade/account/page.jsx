@@ -131,12 +131,15 @@ const Account = () => {
             <div className="w-full md:w-1/3 flex flex-col gap-3">
               <div className="bg-[#191f3a] flex flex-col items-center justify-center gap-3 rounded-3 py-4">
                 <Image
-                  src={avartar}
+                  src={details.image}
                   alt="avartar"
                   width={150}
                   height={150}
                   priority
                 />
+                <small className="text-gray-400">
+                  {user?.user[0]?.fullname}
+                </small>
                 <small className="text-gray-400">
                   Membership: {details.membership}
                 </small>
@@ -160,7 +163,7 @@ const Account = () => {
                   </p>
                   <div className="font-bold">
                     <p>Email</p>
-                    <p className="text-gray-400">{details.email}</p>
+                    <p className="text-gray-400 text-[12px]">{details.email}</p>
                   </div>
                 </div>
               </div>

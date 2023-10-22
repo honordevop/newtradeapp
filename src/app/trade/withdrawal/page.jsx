@@ -10,15 +10,17 @@ import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { CirclesWithBar } from "react-loader-spinner";
 import { toast } from "react-toastify";
+import useSWR from "swr";
 
 const Withdrawal = () => {
   const [showSideBar, setShowSideBar] = useState(false);
   const [toastData, setToastData] = useState("");
 
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
   const router = useRouter();
   const session = useSession();
 
-  const notify = () => toast("Wow so easy!");
   if (session.status === "loading") {
     return (
       <div className="absolute h-[100vh] w-[100vw] flex items-center justify-center">
@@ -42,6 +44,11 @@ const Withdrawal = () => {
     router?.push("/trade/login");
   }
 
+  const { data, error, mutate, isLoading } = useSWR(
+    `/api/trades?email=${session?.data?.user.email}`,
+    fetcher
+  );
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const amount = e.target[0].value;
@@ -61,7 +68,16 @@ const Withdrawal = () => {
       });
       const data = await res.json();
       console.log(data);
-      toast(data.message);
+      toast(data.message, {
+        position: "top-right",
+        autoClose: 7000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       // setToastData(data.message);
       // toast(toastData, {
       //   hideProgressBar: true,
@@ -117,16 +133,18 @@ const Withdrawal = () => {
         <div className="bg-[#0c1023] h-max p-3 w-full">
           <DashboardTop />
           <div className="flex flex-col gap-4">
-            <div className="flex-1 bg-[#ff5959] flex items-center justify-between py-1 px-2 md:p-3 lg:p-5 rounded-[5px] w-max gap-5">
-              <div onClick={notify}>
+            <div className="flex-1 bg-[#ff5959] flex items-center justify-between py-1 px-2 md:p-3 lg:p-5 rounded-[5px] w-max gap-5 mt-4">
+              <div>
                 <p className="text-[16px]">NET BALANCE</p>
-                <h1 className="font-bold text-[20px]">0.00</h1>
+                <h1 className="font-bold text-[20px]">
+                  {data?.trades[0]?.netbalance}
+                </h1>
               </div>
               <FaMoneyBillAlt className="text-[30px]" />
             </div>
 
-            <div>
-              <p className="bg-[#191f3a] p-2 text-[18px] font-bold">
+            <div className="flex flex-col items-start justify-center gap-3 mt-3">
+              <p className="bg-[#191f3a] p-2 text-[18px] font-bold w-full">
                 MAKE A WITHDRAWAL
               </p>
               <p className="flex items-center gap-3 text-[20px]">
@@ -149,6 +167,7 @@ const Withdrawal = () => {
                   <label htmlFor="">Amount</label>
                   <input
                     type="text"
+                    placeholder="Enter amount"
                     className="bg-[#21263d] p-3 outline-none"
                   />
                 </div>
@@ -157,12 +176,13 @@ const Withdrawal = () => {
                   <label htmlFor="">Your Wallet Address</label>
                   <input
                     type="text"
+                    placeholder="Enter wallet address"
                     className="bg-[#21263d] p-3 outline-none"
                   />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <button className="bg-[#5965F9] px-4 py-3 w-max rounded-[5px] cursor-pointer">
+                  <button className="bg-[#5965F9] px-4 py-3 w-max rounded-[5px] cursor-pointer mb-1">
                     Submit
                   </button>
                   <p>
