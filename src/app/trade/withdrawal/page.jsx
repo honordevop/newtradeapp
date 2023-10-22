@@ -167,6 +167,7 @@ const Withdrawal = () => {
                   <label htmlFor="">Amount</label>
                   <input
                     type="text"
+                    required
                     placeholder="Enter amount"
                     className="bg-[#21263d] p-3 outline-none"
                   />
@@ -176,6 +177,7 @@ const Withdrawal = () => {
                   <label htmlFor="">Your Wallet Address</label>
                   <input
                     type="text"
+                    required
                     placeholder="Enter wallet address"
                     className="bg-[#21263d] p-3 outline-none"
                   />

@@ -169,6 +169,7 @@ const Deposit = () => {
                   <label htmlFor="">Amount</label>
                   <input
                     type="text"
+                    required
                     className="bg-[#21263d] p-3 outline-none"
                   />
                 </div>

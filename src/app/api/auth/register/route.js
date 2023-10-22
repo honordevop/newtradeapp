@@ -34,11 +34,20 @@ export const POST = async (request) => {
   });
 
   try {
-    await initializeTrade.save();
+    const user = await Users.findOne({
+      email: email,
+    });
+    if (user) {
+      return NextResponse.json(
+        { message: "Account already exist" },
+        { status: 500 }
+      );
+    }
     await newUser.save();
-    return NextResponse.json({ message: "Account created" }, { status: 201 });
+    await initializeTrade.save();
+    return NextResponse.json({ message: "Account Created" }, { status: 201 });
   } catch (err) {
-    return new NextResponse(err.message, { status: 500 });
+    return NextResponse.json({ err }, { status: 500 });
   }
 };
 

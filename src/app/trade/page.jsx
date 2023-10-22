@@ -19,6 +19,7 @@ const Dashboard = () => {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const session = useSession();
+  const router = useRouter();
 
   const { data, error, mutate, isLoading } = useSWR(
     `/api/trades?email=${session?.data?.user.email}`,
@@ -62,7 +63,6 @@ const Dashboard = () => {
   }
 
   // console.log(session);
-  const router = useRouter();
 
   if (session.status === "loading") {
     return (

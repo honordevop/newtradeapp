@@ -2,7 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { signOut, useSession } from "next-auth/react";
 import fibologo from "public/fibologo.PNG";
 import fibologo1 from "public/fibomining.PNG";
 
@@ -44,11 +43,6 @@ const Navbar = () => {
             >
               LOGIN
             </Link>
-            {session.status === "authenticated" && (
-              <button className="text-red-800" onClick={signOut}>
-                LogOut
-              </button>
-            )}
             <Link
               href="/trade/register"
               className={`bground py-2 px-4 rounded-[20px]`}

@@ -12,13 +12,13 @@ import Contact from "@/components/Contact";
 import Partner from "@/components/Partner";
 import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
-import { signIn } from "next-auth/react";
-import Btn from "@/components/Btn";
+import { signIn, useSession } from "next-auth/react";
+import LoginCheck from "@/components/LoginCheck";
 
 export default function Home() {
   return (
-    // <Btn />
     <div className="flex flex-col items-center justify-center">
+      <LoginCheck />
       {/* <ParticleBackground /> */}
       <Navbar />
       <Hero />

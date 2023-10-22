@@ -5,8 +5,6 @@ import Image from "next/image";
 import clientLogo from "public/fibomining.PNG";
 import Link from "next/link";
 import { FaHome } from "react-icons/fa";
-import LoginForm from "@/components/LoginForm";
-// import Register from "@/components/Register";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { CirclesWithBar } from "react-loader-spinner";
@@ -20,6 +18,7 @@ const Register = () => {
   const [occupation, setOccupation] = useState("");
   const [password, setPassword] = useState("");
   const [mobilenumber, setMobilenumber] = useState("");
+  const [error, setError] = useState("");
 
   const session = useSession();
   const router = useRouter();
@@ -85,16 +84,20 @@ const Register = () => {
           password,
         }),
       });
-      setFullname("");
-      setEmail("");
-      setMobilenumber("");
-      setCountry("");
-      setCurrency("");
-      setOccupation("");
-      setPassword("");
+      // setFullname("");
+      // setEmail("");
+      // setMobilenumber("");
+      // setCountry("");
+      // setCurrency("");
+      // setOccupation("");
+      // setPassword("");
       // const data = await res.json();
       const data = await res.json();
       // console.log(data);
+      setError(data.message);
+      setTimeout(() => {
+        setError("");
+      }, 5000);
       toast(data.message, {
         position: "top-right",
         autoClose: 7000,
@@ -167,7 +170,7 @@ const Register = () => {
                       name="fullname"
                       onChange={(e) => setFullname(e.target.value)}
                       value={fullname}
-                      required=""
+                      required
                       placeholder="Full name"
                     />
                   </div>
@@ -178,7 +181,7 @@ const Register = () => {
                       name="email"
                       onChange={(e) => setEmail(e.target.value)}
                       value={email}
-                      required=""
+                      required
                       placeholder="Email address"
                     />
                   </div>
@@ -190,7 +193,7 @@ const Register = () => {
                       value={mobilenumber}
                       className="form-control"
                       name="mobile"
-                      required=""
+                      required
                       placeholder="Mobile Number"
                     />
                   </div>
@@ -202,7 +205,7 @@ const Register = () => {
                       name="country"
                       onChange={(e) => setCountry(e.target.value)}
                       value={country}
-                      required=""
+                      required
                       placeholder="Country"
                     />
                   </div>
@@ -214,7 +217,7 @@ const Register = () => {
                       name="currency"
                       onChange={(e) => setCurrency(e.target.value)}
                       value={currency}
-                      required=""
+                      required
                       placeholder="Currency"
                     />
                   </div>
@@ -226,7 +229,7 @@ const Register = () => {
                       name="occupation"
                       onChange={(e) => setOccupation(e.target.value)}
                       value={occupation}
-                      required=""
+                      required
                       placeholder="Occupation"
                       // style={{ color: "red" }}
                     />
@@ -240,7 +243,7 @@ const Register = () => {
                         name="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
-                        required=""
+                        required
                         placeholder="Password"
                         autoComplete="on"
                       />
@@ -280,6 +283,9 @@ const Register = () => {
                       .
                     </p>
                   </div>
+                  <p className="text-[12px] md:text-[14px] font-bold text-red-600">
+                    {error}
+                  </p>
                   <div className="form-group">
                     <button
                       name="register-me"
