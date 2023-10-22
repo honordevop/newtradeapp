@@ -8,8 +8,6 @@ import fibologo1 from "public/fibomining.PNG";
 const Navbar = () => {
   const [showNav, SetshowNav] = useState(false);
 
-  const session = useSession();
-
   return (
     <nav className="w-screen flex items-center text-white justify-center bg-[#1a1c34] relative">
       {/* Desktop Navigation */}
