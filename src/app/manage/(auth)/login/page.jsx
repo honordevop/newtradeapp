@@ -101,7 +101,7 @@ const Login = () => {
   }
 
   if (session.status === "authenticated") {
-    router?.push("/trade");
+    router?.push("/manage");
   }
 
   return (
@@ -141,11 +141,9 @@ const Login = () => {
             <div className="flex flex-col gap-5">
               <div className="flex flex-col items-center justify-center gap-2">
                 <h1 className="text-[#12142C] font-bold text-[30px]">
-                  Login to your account
+                  Admin Login
                 </h1>
-                <p className="text-black text-[20px]">
-                  Don't have an account? Click Register Now!
-                </p>
+                <p className="text-black text-[20px]">Login to your account</p>
               </div>
               <div>
                 <form
