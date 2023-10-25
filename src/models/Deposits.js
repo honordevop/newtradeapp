@@ -21,6 +21,9 @@ const depositSchema = new Schema(
       type: String,
       default: "pending",
     },
+    method: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

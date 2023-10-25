@@ -5,10 +5,9 @@ import React, { useEffect, useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { CirclesWithBar, Vortex } from "react-loader-spinner";
 import useSWR from "swr";
-import UserTable from "@/components/UserTable";
 import AdminSideBar from "@/components/AdminSideBar";
 import AdminDesktopSideBar from "@/components/AdminDesktopSideBar";
-import TransactionRecord from "@/components/TransactionRecord";
+import TradesTable from "@/components/Trades";
 import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
@@ -20,17 +19,17 @@ const Dashboard = () => {
   const router = useRouter();
 
   const {
-    data: deposits,
+    data: trades,
     error,
     mutate,
     isLoading,
-  } = useSWR(`/api/manage/deposit`, fetcher);
-
-  const { data: withdrawals } = useSWR(`/api/manage/withdraw`, fetcher);
+  } = useSWR(`/api/manage/trades`, fetcher);
 
   // console.log(users?.users);
+  // console.log(trades[0]);
+  // console.log(trades?.allTrades);
 
-  if (!deposits || !withdrawals) {
+  if (!trades) {
     return (
       <div className="absolute h-[100vh] w-[100vw] flex items-center justify-center">
         <CirclesWithBar
@@ -117,21 +116,12 @@ const Dashboard = () => {
           <AdminDesktopSideBar />
           <div className="bg-[#0c1023] h-max p-3 w-full">
             {/* <DashboardTop /> */}
-            <h4 className="py-4">All Transaction records</h4>
+            <h4 className="py-4">All Trades</h4>
             {/* Status Card */}
             <div className="w-full">
               {/* <TradeviewSingleTicker /> */}
               <div className="h-[80vh] overflow-y-scroll">
-                <div className="overflow-x-auto">
-                  <h6>Deposit Records</h6>
-                  <TransactionRecord records={deposits?.allDeposits || []} />
-                  <br />
-                  <br />
-                  <h6>Withdraw Records</h6>
-                  <TransactionRecord
-                    records={withdrawals?.allWithdrawals || []}
-                  />
-                </div>
+                <TradesTable records={trades?.allTrades || []} />
               </div>
             </div>
           </div>

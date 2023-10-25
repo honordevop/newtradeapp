@@ -21,6 +21,9 @@ const withdrawSchema = new Schema(
       type: String,
       required: true,
     },
+    method: {
+      type: String,
+    },
     status: {
       type: String,
       default: "pending",

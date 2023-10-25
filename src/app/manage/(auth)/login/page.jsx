@@ -110,7 +110,7 @@ const Login = () => {
       className="flex flex-col items-center justify-center "
     >
       <div className="w-10/12 lg:w-max px-3 md:px-10 bg-white flex flex-col lg:flex-row rounded-md my-36 gap-4 md:gap-1">
-        <div className=" w-full lg:w-[350px] text-black flex flex-col items-center justify-center gap-3 text-[20px] py-2 px-0 md:py-24">
+        {/* <div className=" w-full lg:w-[350px] text-black flex flex-col items-center justify-center gap-3 text-[20px] py-2 px-0 md:py-24">
           <Image src={clientLogo} alt="logo" width={100} height={100} />
           <div className="text-center pb-3">
             <p>The Fibomining Investment Platform.</p>
@@ -134,7 +134,7 @@ const Login = () => {
               Register Now
             </Link>
           </div>
-        </div>
+        </div> */}
 
         <div className="py-24 border-t-4 lg:border-t-0 lg:border-l-4 border-gray-300 ">
           <div className=" p-1 md:p-3 ">

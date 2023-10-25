@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
-const UserTable = ({ records }) => {
+const DepositTable = ({ records }) => {
   const [update, setUpdate] = useState(false);
   const [id, setId] = useState("");
   const router = useRouter();
@@ -19,7 +19,7 @@ const UserTable = ({ records }) => {
     if (userConfirmed) {
       // Continue with the action
       try {
-        const res = await fetch(`/api/manage/users/${id}`, {
+        const res = await fetch(`/api/manage/deposit/${id}`, {
           method: "DELETE",
         });
         const data = await res.json();
@@ -34,6 +34,7 @@ const UserTable = ({ records }) => {
           progress: undefined,
           theme: "light",
         });
+
         setTimeout(() => {
           window.location.reload();
         }, 3000);
@@ -50,7 +51,7 @@ const UserTable = ({ records }) => {
     // console.log(status);
     if (id && status.trim().length !== 0 && update) {
       try {
-        const res = await fetch(`/api/manage/users/${id}`, {
+        const res = await fetch(`/api/manage/deposit/${id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -100,31 +101,21 @@ const UserTable = ({ records }) => {
     <div className="w-full divide-y divide-gray-200 flex flex-col gap-3">
       {records &&
         (records || [])?.map((user) => {
-          const {
-            _id: id,
-            fullname,
-            email,
-            mobilenumber,
-            country,
-            status,
-          } = user;
+          const { _id: id, email, date, amount, status } = user;
           return (
             <form
               onSubmit={handleSubmit}
-              className="border-1 border-gray-400 flex flex-col md:flex-row w-full gap-2"
+              className="border-1 border-gray-400 flex flex-col md:flex-row w-full gap-2 md:items-center"
               key={id}
             >
-              <div className="px-2 py-2 whitespace-nowrap flex-1 overflow-hidden">
-                {fullname}
+              <div className="px-2 py-1 flex-1 overflow-hidden rounded-[4px] border-white border-1">
+                {date.slice(0, 10)}
               </div>
-              <div className="px-2 py-2 whitespace-nowrap flex-1 overflow-hidden">
+              <div className="px-2 py-1 flex-1 overflow-hidden rounded-[4px] border-white border-1">
                 {email}
               </div>
-              <div className="px-2 py-2 whitespace-nowrap flex-1 overflow-hidden">
-                {mobilenumber}
-              </div>
-              <div className="px-2 py-2 whitespace-nowrap flex-1 overflow-hidden">
-                {country}
+              <div className="px-2 py-1 flex-1 overflow-hidden rounded-[4px] border-white border-1">
+                {amount}
               </div>
               <div className="px-2 py-2 whitespace-nowrap flex-1 overflow-hidden">
                 <input
@@ -154,4 +145,4 @@ const UserTable = ({ records }) => {
   );
 };
 
-export default UserTable;
+export default DepositTable;

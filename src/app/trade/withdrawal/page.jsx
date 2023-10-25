@@ -51,8 +51,9 @@ const Withdrawal = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const amount = e.target[0].value;
-    const walletaddress = e.target[1].value;
+    const method = e.target[0].value;
+    const amount = e.target[1].value;
+    const walletaddress = e.target[2].value;
 
     try {
       const res = await fetch("/api/withdraw", {
@@ -61,6 +62,7 @@ const Withdrawal = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          method,
           amount,
           walletaddress,
           email: session?.data?.user.email,
@@ -148,7 +150,7 @@ const Withdrawal = () => {
                 MAKE A WITHDRAWAL
               </p>
               <p className="flex items-center gap-3 text-[20px]">
-                <FaBitcoin /> Receive in Bitcoin
+                <FaBitcoin /> Receive in Cryptocurrencies
               </p>
             </div>
 
@@ -159,8 +161,13 @@ const Withdrawal = () => {
                 onSubmit={handleSubmit}
               >
                 <div className="flex flex-col gap-1">
-                  <label>Method of withdraw</label>
-                  <p className="p-3 bg-[#21263d]">Bitcoin</p>
+                  <label htmlFor="">Method</label>
+                  <input
+                    type="text"
+                    placeholder="Enter payment method"
+                    required
+                    className="bg-[#21263d] p-3 outline-none"
+                  />
                 </div>
 
                 <div className="flex flex-col gap-1">

@@ -1,10 +1,10 @@
-import { links } from "@/utils/links";
+import { links } from "@/utils/adminlinks";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
 import { FaPowerOff } from "react-icons/fa";
 
-const DesktopSideBar = () => {
+const AdminDesktopSideBar = () => {
   return (
     <div
       className=" hidden top-[80px] left-0 lg:flex bg-[#191f3a] h-[90vh] w-[300px] md:w-[400px]  justify-start transition-all duration-3000 ease-in-out"
@@ -35,4 +35,4 @@ const DesktopSideBar = () => {
   );
 };
 
-export default DesktopSideBar;
+export default AdminDesktopSideBar;

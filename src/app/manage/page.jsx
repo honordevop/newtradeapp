@@ -2,22 +2,20 @@
 import SideBar from "@/components/SideBar";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { links } from "@/utils/links";
-import DesktopSideBar from "@/components/DesktopSideBar";
-import TradeviewTickerWidget from "@/components/TradeviewTickerWidget";
-import DashboardTop from "@/components/DashboardTop";
-import StatusCard from "@/components/StatusCard";
-import TradeviewSingleTicker from "@/components/TradeviewSingleTicker";
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { CirclesWithBar, Vortex } from "react-loader-spinner";
 import useSWR from "swr";
 import UserTable from "@/components/UserTable";
+import AdminSideBar from "@/components/AdminSideBar";
+import AdminDesktopSideBar from "@/components/AdminDesktopSideBar";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
   const [showSideBar, setShowSideBar] = useState(false);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+  const router = useRouter();
 
   const session = useSession();
 
@@ -28,30 +26,28 @@ const Dashboard = () => {
     isLoading,
   } = useSWR(`/api/manage/users`, fetcher);
 
-  console.log(users?.users);
-
-  // if (data) {
-  //   console.log(data);
-  // const details = {
-  //   capital: data?.trades[0]?.capital,
-  //   package: data?.trades[0]?.plan,
-  //   netbalance: data?.trades[0]?.netbalance,
-  //   // status: user?.user[0]?.status || "",
-  // };
-  // }
+  // console.log(users?.users);
 
   if (!users) {
     return (
       <div className="absolute h-[100vh] w-[100vw] flex items-center justify-center">
-        <div>
-          <h5>Loading Data...</h5>
-        </div>
+        <CirclesWithBar
+          height="100"
+          width="100"
+          color="#5965F9"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+          outerCircleColor=""
+          innerCircleColor=""
+          barColor=""
+          ariaLabel="circles-with-bar-loading"
+        />
       </div>
     );
   }
 
-  console.log(session);
-  const router = useRouter();
+  // console.log(session);
 
   if (session.status === "loading") {
     return (
@@ -73,7 +69,7 @@ const Dashboard = () => {
   }
 
   if (session.status === "unauthenticated") {
-    router?.push("/manage/auth");
+    router?.push("/manage/login");
   }
 
   // console.log(user.user[0].status);
@@ -94,7 +90,7 @@ const Dashboard = () => {
           <div className=" w-full flex  items-center justify-between md:justify-end">
             {/* Mobile Sidebar Controller */}
             <div
-              className={` flex flex-col gap-2 rounded-md bground p-4 cursor-pointer md:hidden`}
+              className={` flex flex-col gap-2 rounded-md bground p-4 cursor-pointer lg:hidden`}
               onClick={() => showBar()}
             >
               <div className="w-[25px] h-[5px] bg-white"></div>
@@ -116,13 +112,14 @@ const Dashboard = () => {
 
         {/* Desktop Sidebar */}
         <div className="flex ">
-          <DesktopSideBar />
-          <div className="bg-[#0c1023] h-[90vh] p-3 w-full">
-            <DashboardTop />
+          <AdminDesktopSideBar />
+          <div className="bg-[#0c1023] h-max p-3 w-full">
+            {/* <DashboardTop /> */}
+            <h4 className="py-4">User Accounts</h4>
             {/* Status Card */}
             <div className="w-full">
               {/* <TradeviewSingleTicker /> */}
-              <div className="overflow-x-auto">
+              <div className="h-[80vh] overflow-y-scroll">
                 <UserTable records={users?.users || []} />
               </div>
             </div>
@@ -131,7 +128,7 @@ const Dashboard = () => {
         {/* Mobile Sidebar */}
         {showSideBar && (
           <div>
-            <SideBar showSideBar={showSideBar} hideBar={hideBar} />
+            <AdminSideBar showSideBar={showSideBar} hideBar={hideBar} />
           </div>
         )}
       </div>

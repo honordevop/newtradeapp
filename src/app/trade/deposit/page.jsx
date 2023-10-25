@@ -6,7 +6,9 @@ import { links } from "@/utils/links";
 import DesktopSideBar from "@/components/DesktopSideBar";
 import DashboardTop from "@/components/DashboardTop";
 import { FaMoneyBillAlt, FaBitcoin } from "react-icons/fa";
-import qr from "public/qr.png";
+import btc from "public/btc.jpg";
+import eth from "public/eth.jpg";
+import usdt from "public/usdt.jpg";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -44,7 +46,8 @@ const Deposit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const amount = e.target[0].value;
+    const method = e.target[0].value;
+    const amount = e.target[1].value;
 
     try {
       const res = await fetch("/api/deposit", {
@@ -54,6 +57,7 @@ const Deposit = () => {
         },
         body: JSON.stringify({
           amount,
+          method,
           email: session?.data?.user.email,
         }),
       });
@@ -132,22 +136,48 @@ const Deposit = () => {
                 MAKE A DEPOSIT
               </p>
               <p className="flex items-center gap-3 text-[20px]">
-                <FaBitcoin /> Pay with Bitcoin
+                <FaBitcoin /> Pay with Bitcoin/USDT/Etherum
               </p>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-3">
               <p className="bg-[#d8efcc] p-3 text-[#1f5c01] w-full">
                 <span className="font-bold">STEP 1</span>- Send your deposit to
-                the address below
+                any of the address below
               </p>
               <h1 className="">MAKE A DEPOSIT</h1>
-              <p className="font-bold">Fibomining Oficial Wallet</p>
-              <p className="p-3 bg-[#21263d] text-[12px] md:text-[14px]">
-                admcauncapzodqjcmow7e6w6e38080c039493q
-              </p>
-              <p>Or scan the QR Code below</p>
-              <Image src={qr} alt="qr code" />
+
+              <div className="flex flex-wrap gap-3 items-center justify-center md:justify-start">
+                {/* Bitcoin */}
+                <div className="flex flex-col items-center">
+                  <p className="font-bold">Pay with Bitcoin</p>
+                  <p className="p-3 bg-[#21263d] text-[12px] md:text-[14px]">
+                    3QUDRRungtku8qEJqUbCTANojLU2sLhSPm
+                  </p>
+                  <p>Or scan the QR Code below</p>
+                  <Image src={btc} width={200} height={200} alt="qr code" />
+                </div>
+
+                {/* USDT */}
+                <div className="flex flex-col items-center">
+                  <p className="font-bold">Pay with USDT</p>
+                  <p className="p-3 bg-[#21263d] text-[12px] md:text-[14px]">
+                    0x57b14e01a7117db7Bd3F51436C7B0bA90017Da2c
+                  </p>
+                  <p>Or scan the QR Code below</p>
+                  <Image src={usdt} width={200} height={200} alt="qr code" />
+                </div>
+
+                {/* Etherum */}
+                <div className="flex flex-col items-center">
+                  <p className="font-bold">Pay with Etherum</p>
+                  <p className="p-3 bg-[#21263d] text-[12px] md:text-[14px]">
+                    0x99391826bf0e298a6A5e51fB0eea64eB6f3560b8
+                  </p>
+                  <p>Or scan the QR Code below</p>
+                  <Image src={eth} width={200} height={200} alt="qr code" />
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-col items-center justify-center gap-3 mt-4">
@@ -161,14 +191,20 @@ const Deposit = () => {
               >
                 <p className="text-[20px] font-bold">CONFIRM YOUR DEPOSIT</p>
                 <div className="flex flex-col gap-1">
-                  <label>Method of Deposit</label>
-                  <p className="p-3 bg-[#21263d]">Bitcoin</p>
+                  <label htmlFor="">Method</label>
+                  <input
+                    type="text"
+                    placeholder="Enter payment method"
+                    required
+                    className="bg-[#21263d] p-3 outline-none"
+                  />
                 </div>
 
                 <div className="flex flex-col gap-1">
                   <label htmlFor="">Amount</label>
                   <input
                     type="text"
+                    placeholder="Enter amount"
                     required
                     className="bg-[#21263d] p-3 outline-none"
                   />

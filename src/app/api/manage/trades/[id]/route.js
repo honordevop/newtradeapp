@@ -33,3 +33,17 @@ export async function PATCH(request, { params }) {
     return NextResponse.json({ message: "Database Error" }, { status: 500 });
   }
 }
+
+export const DELETE = async (request, { params }) => {
+  //fetch
+  const { id } = params;
+  try {
+    await connect();
+
+    await Trade.findByIdAndDelete(id);
+
+    return NextResponse.json({ message: "Trade deleted" }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ message: "Database Error" }, { status: 500 });
+  }
+};

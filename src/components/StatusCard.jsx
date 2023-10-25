@@ -18,6 +18,13 @@ const StatusCard = ({ details }) => {
         </div>
         <FaStar className="text-[30px]" />
       </div>
+      <div className="flex-1 bg-[#37193a] flex items-center justify-between py-1 px-2 md:p-3 lg:p-5 rounded-[5px]">
+        <div>
+          <p className="text-[16px]">Profit</p>
+          <h1 className="font-bold text-[25px]">{details.profit}</h1>
+        </div>
+        <FaMoneyBillAlt className="text-[30px]" />
+      </div>
       <div className="flex-1 bg-[#191f3a] flex items-center justify-between py-1 px-2 md:p-3 lg:p-5 rounded-[5px]">
         <div>
           <p className="text-[16px]">NETBALANCE</p>

@@ -39,6 +39,7 @@ const Dashboard = () => {
     capital: data?.trades[0]?.capital,
     package: data?.trades[0]?.plan,
     netbalance: data?.trades[0]?.netbalance,
+    profit: data?.trades[0]?.profit,
     status: user?.user[0]?.status || "",
   };
   // }

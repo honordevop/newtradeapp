@@ -26,9 +26,10 @@ export const GET = async (request) => {
 export const POST = async (request) => {
   // const email = url.searchParams.get("email");
 
-  const { amount, email } = await request.json();
+  const { amount, email, method } = await request.json();
 
   const newDeposit = new Deposits({
+    method,
     amount,
     email,
   });

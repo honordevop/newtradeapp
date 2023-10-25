@@ -16,6 +16,7 @@ const Account = () => {
   const [showSideBar, setShowSideBar] = useState(false);
 
   const session = useSession();
+  const router = useRouter();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, error, mutate, isLoading } = useSWR(
@@ -63,7 +64,6 @@ const Account = () => {
     },
   ];
 
-  const router = useRouter();
   if (session.status === "loading") {
     return (
       <div className="absolute h-[100vh] w-[100vw] flex items-center justify-center">

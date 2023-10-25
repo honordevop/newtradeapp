@@ -14,9 +14,24 @@ export async function PATCH(request, { params }) {
 
     await Withdraw.findByIdAndUpdate(id, { status, amount });
 
-    return NextResponse.json({ message: "Status Updated" }, { status: 201 });
+    return NextResponse.json({ message: "Request Updated" }, { status: 201 });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ message: "Database Error" }, { status: 500 });
   }
 }
+
+export const DELETE = async (request, { params }) => {
+  //fetch
+  const { id } = params;
+  try {
+    await connect();
+
+    await Withdraw.findByIdAndDelete(id);
+
+    return NextResponse.json({ message: "Data deleted" }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "Database Error" }, { status: 500 });
+  }
+};
