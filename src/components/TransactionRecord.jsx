@@ -25,7 +25,7 @@ const TransactionRecord = ({ records }) => {
 
       <tbody>
         {records?.map((deposit) => {
-          const { _id: id, amount, status, date } = deposit;
+          const { _id: id, amount, status, date, method } = deposit;
 
           return (
             <tr className="border-1 border-gray-400" key={id}>
@@ -34,7 +34,9 @@ const TransactionRecord = ({ records }) => {
                 {date.slice(0, 10)}
               </td>
               <td className="px-6 py-2 whitespace-nowrap">{amount}</td>
-              <td className="px-6 py-2 whitespace-nowrap">bitcoin</td>
+              <td className="px-6 py-2 whitespace-nowrap">
+                {method || "Bitcoin"}{" "}
+              </td>
               <td className="px-6 py-2 whitespace-nowrap">{status}</td>
             </tr>
           );

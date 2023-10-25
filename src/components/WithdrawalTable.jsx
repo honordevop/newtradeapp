@@ -128,7 +128,15 @@ const WithdrawalTable = ({ records }) => {
     <div className="w-full divide-y divide-gray-200 flex flex-col gap-3">
       {records &&
         (records || [])?.map((req) => {
-          const { _id: id, email, date, amount, status, walletaddress } = req;
+          const {
+            _id: id,
+            email,
+            date,
+            amount,
+            status,
+            walletaddress,
+            method,
+          } = req;
           return (
             <form
               onSubmit={handleSubmit}
@@ -144,6 +152,9 @@ const WithdrawalTable = ({ records }) => {
               <div className="px-2 text-[12px] py-1 flex-1 overflow-hidden rounded-[4px] border-white border-1">
                 {walletaddress}
               </div>
+              <div className="px-2 text-[12px] py-1 flex-1 overflow-hidden rounded-[4px] border-white border-1">
+                {method || "Bitcoin"}
+              </div>
               <div className="px-2 py-2 flex-1 overflow-hidden">
                 <input
                   type="text"
@@ -158,7 +169,7 @@ const WithdrawalTable = ({ records }) => {
                   className="flex-1 overflow-hidden p-2 text-teal-900 outline-none bg-slate-300 rounded-[5px]"
                 />
               </div>
-              <div className="px-2 py-2 flex gap-3">
+              <div className="px-2 py-2 flex gap-3 md:flex-col">
                 <button
                   className="bg-green-600 rounded-[5px] p-2"
                   onClick={() => setIdHandler(id)}
