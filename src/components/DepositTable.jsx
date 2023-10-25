@@ -101,7 +101,7 @@ const DepositTable = ({ records }) => {
     <div className="w-full divide-y divide-gray-200 flex flex-col gap-3">
       {records &&
         (records || [])?.map((user) => {
-          const { _id: id, email, date, amount, status } = user;
+          const { _id: id, email, date, amount, status, method } = user;
           return (
             <form
               onSubmit={handleSubmit}
@@ -113,6 +113,9 @@ const DepositTable = ({ records }) => {
               </div>
               <div className="px-2 py-1 flex-1 overflow-hidden rounded-[4px] border-white border-1">
                 {email}
+              </div>
+              <div className="px-2 py-1 flex-1 overflow-hidden rounded-[4px] border-white border-1">
+                {method}
               </div>
               <div className="px-2 py-1 flex-1 overflow-hidden rounded-[4px] border-white border-1">
                 {amount}
