@@ -1,18 +1,19 @@
 import { NextResponse } from "next/server";
 import connect from "@/utils/db";
-import Deposits from "@/models/Deposits";
+import Withdraw from "@/models/Withdraw";
+import Code from "@/models/Code";
 
 export const GET = async (request) => {
-  const url = new URL(request.url);
+  // const url = new URL(request.url);
 
-  const email = url.searchParams.get("email");
+  // const email = url.searchParams.get("email");
 
   //fetch
   try {
     await connect();
 
-    const deposits = (await Deposits.find(email && { email })).reverse();
-    return new NextResponse(JSON.stringify(deposits), { status: 200 });
+    const codes = await Code.find();
+    return new NextResponse(JSON.stringify(codes), { status: 200 });
   } catch (error) {
     return new NextResponse("Database Error", { status: 500 });
   }
@@ -21,21 +22,23 @@ export const GET = async (request) => {
 export const POST = async (request) => {
   // const email = url.searchParams.get("email");
 
-  const { amount, email, method } = await request.json();
+  const { email, code } = await request.json();
 
-  const newDeposit = new Deposits({
-    method,
-    amount,
+  const generateCode = new Code({
     email,
+    code,
   });
 
   //fetch
   try {
     await connect();
 
-    await newDeposit.save();
+    await generateCode.save();
 
-    return NextResponse.json({ message: "Deposit submited" }, { status: 201 });
+    return NextResponse.json(
+      { message: "Code Generated Sucessfully" },
+      { status: 201 }
+    );
   } catch (error) {
     return NextResponse.json({ message: "Database Error" }, { status: 500 });
   }

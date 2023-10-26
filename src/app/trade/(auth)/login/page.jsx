@@ -8,7 +8,7 @@ import { FaHome } from "react-icons/fa";
 // import Login from "@/components/Login";
 import Register from "@/components/Register";
 import { useRouter } from "next/navigation";
-import { CirclesWithBar } from "react-loader-spinner";
+import { Circles, CirclesWithBar } from "react-loader-spinner";
 import { signIn, useSession } from "next-auth/react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
@@ -22,6 +22,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const session = useSession();
   const router = useRouter();
@@ -36,6 +37,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+    setSubmitting(true);
     e.preventDefault();
     // const email = e.target[0].value;
     // const password = e.target[1].value;
@@ -48,6 +50,7 @@ const Login = () => {
       redirect: false,
     });
     // console.log(res);
+    setSubmitting(false);
     setError(res.error);
     toast(res.error, {
       position: "top-right",
@@ -184,11 +187,27 @@ const Login = () => {
                     )}
                   </div>
                   <p className="text-[12px] font-bold text-red-600">{error}</p>
-                  <input
-                    type="submit"
-                    value="Login"
-                    className="bg-[#12142C] w-full text-white p-2 cursor-pointer text-center rounded-[5px] flex items-center justify-center font-bold text-[25px]"
-                  />
+                  <div>
+                    {!submitting ? (
+                      <input
+                        type="submit"
+                        value="Login"
+                        className="bg-[#12142C] w-full text-white p-2 cursor-pointer text-center rounded-[5px] flex items-center justify-center font-bold text-[25px]"
+                      />
+                    ) : (
+                      <div className="w-full cursor-pointer flex items-center justify-center ">
+                        <Circles
+                          height="50"
+                          width="50"
+                          color="#12142C"
+                          ariaLabel="circles-loading"
+                          wrapperStyle={{}}
+                          wrapperClass=""
+                          visible={true}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </form>
               </div>
             </div>

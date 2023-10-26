@@ -11,13 +11,8 @@ export const GET = async (request) => {
   try {
     await connect();
 
-    if (email) {
-      const trades = (await Trade.find(email && { email })).reverse();
-      return NextResponse.json({ trades }, { status: 200 });
-    } else {
-      const trades = await Trade.find().reverse();
-      return NextResponse.json({ trades }, { status: 200 });
-    }
+    const trades = (await Trade.find(email && { email })).reverse();
+    return NextResponse.json({ trades }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ message: "Database Error" }, { status: 500 });
   }

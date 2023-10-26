@@ -40,10 +40,10 @@ export const links = [
     url: "/manage/transactionsrecords",
     icon: <FaDollarSign />,
   },
-  // {
-  //   id: "6",
-  //   name: "Account Settings",
-  //   url: "/trade/settings",
-  //   icon: <FaEmpire />,
-  // },
+  {
+    id: "6",
+    name: "Generate Code",
+    url: "/manage/generatecode",
+    icon: <FaEmpire />,
+  },
 ];

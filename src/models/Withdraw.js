@@ -24,6 +24,10 @@ const withdrawSchema = new Schema(
     method: {
       type: String,
     },
+    code: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       default: "pending",

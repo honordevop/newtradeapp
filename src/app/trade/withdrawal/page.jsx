@@ -8,13 +8,15 @@ import DashboardTop from "@/components/DashboardTop";
 import { FaMoneyBillAlt, FaBitcoin } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import { CirclesWithBar } from "react-loader-spinner";
+import { Circles, CirclesWithBar } from "react-loader-spinner";
 import { toast } from "react-toastify";
 import useSWR from "swr";
 
 const Withdrawal = () => {
   const [showSideBar, setShowSideBar] = useState(false);
   const [toastData, setToastData] = useState("");
+  const [withdrawalCode, setWithdrawalCode] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -49,27 +51,24 @@ const Withdrawal = () => {
     router?.push("/trade/login");
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const method = e.target[0].value;
-    const amount = e.target[1].value;
-    const walletaddress = e.target[2].value;
-
+  const verifyWithdrawalCodeForUser = async () => {
+    setSubmitting(true);
+    // const withdrawalCode = e.target[2].value;
     try {
-      const res = await fetch("/api/withdraw", {
+      const res = await fetch("/api/manage/verifycode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          method,
-          amount,
-          walletaddress,
           email: session?.data?.user.email,
+          code: withdrawalCode,
         }),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
+      // console.log(res.status);
+
       toast(data.message, {
         position: "top-right",
         autoClose: 7000,
@@ -80,19 +79,73 @@ const Withdrawal = () => {
         progress: undefined,
         theme: "light",
       });
-      // setToastData(data.message);
-      // toast(toastData, {
-      //   hideProgressBar: true,
-      //   autoClose: 2000,
-      //   type: "success",
-      // });
-      e.target.reset();
-
-      // res.status === 201 &&
-      //   router.push("/trade/login?success=Account has been created");
+      if (res.status === 404) {
+        setSubmitting(false);
+      }
+      return res.status;
     } catch (err) {
       // setErr(true);
-      console.log(err);
+      console.log(err.message);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const method = e.target[0].value;
+    const amount = e.target[1].value;
+    // const code = e.target[2].value;
+    const walletaddress = e.target[3].value;
+
+    const codeVerify = await verifyWithdrawalCodeForUser();
+    // console.log(codeVerify);
+
+    if (codeVerify === 200) {
+      try {
+        const res = await fetch("/api/withdraw", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            method,
+            amount,
+            code: withdrawalCode,
+            walletaddress,
+            email: session?.data?.user.email,
+          }),
+        });
+        const data = await res.json();
+        // console.log(data);
+        toast(data.message, {
+          position: "top-right",
+          autoClose: 7000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
+        e.target.reset();
+        setSubmitting(false);
+        // res.status === 201 &&
+        //   router.push("/trade/login?success=Account has been created");
+      } catch (err) {
+        setSubmitting(false);
+        console.log(err);
+      }
+    } else {
+      toast("Withdrawal request failed", {
+        position: "top-right",
+        autoClose: 7000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const showBar = () => {
@@ -179,6 +232,16 @@ const Withdrawal = () => {
                     className="bg-[#21263d] p-3 outline-none"
                   />
                 </div>
+                <div className="flex flex-col gap-1">
+                  <label htmlFor="">Withdrawal Code</label>
+                  <input
+                    type="text"
+                    onChange={(e) => setWithdrawalCode(e.target.value)}
+                    required
+                    placeholder="Get withrawal code from admin"
+                    className="bg-[#21263d] p-3 outline-none"
+                  />
+                </div>
 
                 <div className="flex flex-col gap-1">
                   <label htmlFor="">Your Wallet Address</label>
@@ -191,9 +254,21 @@ const Withdrawal = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <button className="bg-[#5965F9] px-4 py-3 w-max rounded-[5px] cursor-pointer mb-1">
-                    Submit
-                  </button>
+                  {!submitting ? (
+                    <button className="bg-[#5965F9] px-4 py-3 w-max rounded-[5px] cursor-pointer mb-1">
+                      Submit
+                    </button>
+                  ) : (
+                    <Circles
+                      height="60"
+                      width="60"
+                      color="#5965F9"
+                      ariaLabel="circles-loading"
+                      wrapperStyle={{}}
+                      wrapperClass=""
+                      visible={true}
+                    />
+                  )}
                   <p>
                     <span>Note:</span>You will get a follow up mail on the
                     status on your withdrawal

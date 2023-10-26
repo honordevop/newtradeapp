@@ -11,13 +11,8 @@ export const GET = async (request) => {
   try {
     await connect();
 
-    if (email) {
-      const withdrawals = (await Withdraw.find(email && { email })).reverse();
-      return new NextResponse(JSON.stringify(withdrawals), { status: 200 });
-    } else {
-      const withdrawals = await Withdraw.find().reverse();
-      return new NextResponse(JSON.stringify(withdrawals), { status: 200 });
-    }
+    const withdrawals = (await Withdraw.find(email && { email })).reverse();
+    return new NextResponse(JSON.stringify(withdrawals), { status: 200 });
   } catch (error) {
     return new NextResponse("Database Error", { status: 500 });
   }
@@ -26,11 +21,13 @@ export const GET = async (request) => {
 export const POST = async (request) => {
   // const email = url.searchParams.get("email");
 
-  const { amount, walletaddress, email } = await request.json();
+  const { amount, walletaddress, email, method, code } = await request.json();
 
   const withdrawRequest = new Withdraw({
     amount,
+    method,
     walletaddress,
+    code,
     email,
   });
 
