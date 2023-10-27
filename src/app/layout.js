@@ -22,7 +22,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Script src="//code.jivosite.com/widget/JFtcslw5CK" async></Script>
+      <script src="//code.jivosite.com/widget/UMdmGOTjVN" async></script>
 
       <body
         className={`overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-300 ${inter.className}`}
