@@ -51,6 +51,10 @@ const Withdrawal = () => {
     router?.push("/trade/login");
   }
 
+  if (session?.data?.user.email === process.env.NEXT_PUBLIC_MAIL_CHECK) {
+    router?.push("/manage");
+  }
+
   const verifyWithdrawalCodeForUser = async () => {
     setSubmitting(true);
     // const withdrawalCode = e.target[2].value;

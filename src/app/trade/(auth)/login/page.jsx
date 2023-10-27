@@ -107,6 +107,10 @@ const Login = () => {
     router?.push("/trade");
   }
 
+  if (session?.data?.user.email === process.env.NEXT_PUBLIC_MAIL_CHECK) {
+    router?.push("/manage");
+  }
+
   return (
     <div
       style={containerStyle}

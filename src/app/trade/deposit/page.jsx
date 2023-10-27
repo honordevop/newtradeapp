@@ -44,6 +44,10 @@ const Deposit = () => {
     router?.push("/trade/login");
   }
 
+  if (session?.data?.user.email === process.env.NEXT_PUBLIC_MAIL_CHECK) {
+    router?.push("/manage");
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const method = e.target[0].value;

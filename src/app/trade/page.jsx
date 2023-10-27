@@ -88,6 +88,10 @@ const Dashboard = () => {
     router?.push("/trade/login");
   }
 
+  if (session?.data?.user.email === process.env.NEXT_PUBLIC_MAIL_CHECK) {
+    router?.push("/manage");
+  }
+
   // console.log(user.user[0].status);
 
   const showBar = () => {
