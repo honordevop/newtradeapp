@@ -12,8 +12,7 @@ import WithdrawalCodeTable from "@/components/WithrawalCodeTable";
 import { toast } from "react-toastify";
 
 function generateRandomString() {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const characters = process.env.NEXT_PUBLIC_RANDOMVALUE;
   let randomString = "";
 
   for (let i = 0; i < 9; i++) {
@@ -132,6 +131,10 @@ const Dashboard = () => {
     router?.push("/manage/login");
   }
 
+  if (session?.data?.user.email !== process.env.NEXT_PUBLIC_MAIL_CHECK) {
+    router?.push("/trade");
+  }
+
   // console.log(user.user[0].status);
 
   const showBar = () => {
@@ -142,7 +145,10 @@ const Dashboard = () => {
     setShowSideBar(false);
   };
 
-  if (session.status === "authenticated") {
+  if (
+    session.status === "authenticated" &&
+    session?.data?.user.email === process.env.NEXT_PUBLIC_MAIL_CHECK
+  ) {
     return (
       <div className="relative w-full bg-[#191f3a]">
         <div className="w-full h-[80px] md:h-[90px] flex  items-center px-[20px] md:px-[100px] lg:px-[150px]">
