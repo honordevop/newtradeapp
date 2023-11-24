@@ -70,7 +70,7 @@ const Contact = () => {
 
       <div className="flex flex-col items-start justify-center text-xl my-10 border-l-2 border-white pl-3">
         <p className="text-[#307ea1] font-normal   ">Email</p>
-        <h1 className="font-bold ">surport@Fibomining.org</h1>
+        <h1 className="font-bold ">admin@locoonstrade.org</h1>
       </div>
     </div>
   );

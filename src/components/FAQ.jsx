@@ -3,7 +3,7 @@ import React from "react";
 const data = [
   {
     id: "1",
-    title: "Q. How Can I Invest in Fibomining ?",
+    title: "Q. How Can I Invest in Locoons-Trade ?",
     desc: "To invest and start earning, you have to open an account by filling out the sign up form. Once you're done registering, you should proceed to deposit into your account and invest.",
   },
   {
@@ -23,8 +23,8 @@ const data = [
   },
   {
     id: "5",
-    title: "Q. Can I reinvest from my Fibomining account balance ?",
-    desc: "Yes, you can reinvest from your Fibomining account balance, only after you have made a deposit and start earning on the platform.",
+    title: "Q. Can I reinvest from my Locoons-Trade account balance ?",
+    desc: "Yes, you can reinvest from your Locoons-Trade account balance, only after you have made a deposit and start earning on the platform.",
   },
 ];
 

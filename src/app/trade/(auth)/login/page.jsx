@@ -120,7 +120,7 @@ const Login = () => {
         <div className=" w-full lg:w-[350px] text-black flex flex-col items-center justify-center gap-3 text-[20px] py-2 px-0 md:py-24">
           <Image src={clientLogo} alt="logo" width={100} height={100} />
           <div className="text-center pb-3">
-            <p>The Fibomining Investment Platform.</p>
+            <p>The Locoons-Trade Investment Platform.</p>
             <p>
               <span className="font-bold">INVEST</span> and Start
               <span className="font-bold">EARNING</span>

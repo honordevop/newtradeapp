@@ -9,15 +9,15 @@ const ContactPage = () => {
         <h1 className="font-bold text-[18px]">Home / Contact</h1>
       </div>
       <div className="flex flex-col gap-5 items-center justify-center">
-        <h1 className="font-bold text-[50px]">Contact Fibomining</h1>
+        <h1 className="font-bold text-[50px]">Contact Locoons-Trade</h1>
         <p className="text-[22px] leading-normal text-center">
           Domain and all rights belong to: <br />
-          Fibomining <br />
+          Locoons-Trade <br />
           Registration No. TX0089 <br />
           Payment transactions are managed by: <br />
-          Fibomining PAYMENT <br />
+          Locoons-Trade PAYMENT <br />
           Registration No. R3400 <br />
-          support@Fibomining.org <br />
+          support@Locoons-Trade.org <br />
           ADDRESS: 23 Osborne Road KILTON TS13 4AE United States
         </p>
       </div>
@@ -82,7 +82,7 @@ const ContactPage = () => {
 
       <div className="flex flex-col items-start justify-center text-xl my-10 border-l-2 border-white pl-3">
         <p className="text-[#307ea1] font-normal   ">Email</p>
-        <h1 className="font-bold ">surport@Fibomining.org</h1>
+        <h1 className="font-bold ">admin@locoonstrade.org</h1>
       </div>
     </div>
   );

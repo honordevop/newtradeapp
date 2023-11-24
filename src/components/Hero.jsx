@@ -12,7 +12,7 @@ const Hero = () => {
 
       <div className="flex-1 flex flex-col items-center md:items-start md:justify-start justify-center gap-6">
         <h1 className="font-bold text-[50px] leading-normal">
-          <span className="text-[#307ea1]">Fibomining</span> <br />
+          <span className="text-[#307ea1]">Locoons-Trade</span> <br />
           Build your future with Investments.
         </h1>
         <p className="text-[30px] font-bold leading-tight">

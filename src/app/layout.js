@@ -11,7 +11,7 @@ import { ToastContainer } from "react-toastify";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Fibomining",
+  title: "Locoons-Trade",
   description: "Best Investment Platform",
 };
 

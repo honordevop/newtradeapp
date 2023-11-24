@@ -9,13 +9,13 @@ const WhatIs = () => {
       <div className="flex flex-1 flex-col gap-10">
         <div>
           <p className="text-[#307ea1] text-2xl font-medium py-4">
-            WHAT IS FIBOMINING
+            WHAT IS Locoons-Trade
           </p>
-          <h1 className="font-bold text-3xl">About Fibomining</h1>
+          <h1 className="font-bold text-3xl">About Locoons-Trade</h1>
         </div>
         <div>
           <p className="text-[22px] leading-loose text-justify lg:leading-normal">
-            Built on integrity and transparency, Fibomining is an online
+            Built on integrity and transparency, Locoons-Trade is an online
             investment platform focused on cryptocurrency and forex trading
             (currency pairs). Cryptocurrency and forex trading presents you with
             financial opportunities, more than you can imagine and we've created
@@ -33,7 +33,7 @@ const WhatIs = () => {
         </div>
         <div className="text-[22px] leading-loose text-justify lg:leading-normal bg-black rounded-lg text-[#a3ccd9] p-5">
           <p>
-            At Fibomining, We provide an all-round, easy to use, risk-free
+            At Locoons-Trade, We provide an all-round, easy to use, risk-free
             investment platform that increases your earning potential. Join the
             platform to discover the power of earning in an increasing
             cryptocurrency ecosystem.
